@@ -12,7 +12,7 @@ export default function Home() {
             <Button className="w-full mt-4">Join</Button>
           </CardContent>
         </Card>
-        <Link href="#" className="underline">
+        <Link href="/login" className="underline">
           Create Quiz
         </Link>
       </div>

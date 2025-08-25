@@ -7,7 +7,10 @@ import { Header } from "@/components/header";
 export default function LoginPage() {
   // const { data: session } = useSession();
   return (
-    <div style={{ backgroundImage: "url(login-background.svg)" }} className="size-full bg-cover bg-center">
+    <div
+      style={{ backgroundImage: "url(login-background.svg)" }}
+      className="size-full bg-cover bg-center"
+    >
       <Header />
       <div className="flex-1 flex flex-col justify-center items-center gap-y-8">
         <Card className="min-w-[350px]">

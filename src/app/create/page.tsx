@@ -4,9 +4,10 @@ import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Header } from "@/components/header";
 import { GoCopy, GoTrash } from "react-icons/go";
-import { TQuestion } from "@/types";
+import { TOption, TQuestion } from "@/types";
 import { useState } from "react";
 import { QUESTIONS } from "@/mock";
+
 import Image from "next/image";
 
 export default function CreatePage() {
@@ -37,6 +38,17 @@ export default function CreatePage() {
     setQuestions((prev) => [...prev, templateQuestion]);
   };
 
+  const changeOption = (optionId: string, text: string) => {
+    const options = [...selectedQuestion.options];
+    const option = options.filter((item) => (item.id = optionId))[0];
+    option.text = text;
+
+    setSelectedQuestion({
+      ...selectedQuestion,
+      options
+    });
+  };
+
   return (
     <div className="size-full">
       <Header />
@@ -60,7 +72,9 @@ export default function CreatePage() {
                       </button>
                     </div>
                   )}
-                  <div className="w-[150px] h-[90px] border rounded-sm grid place-items-center bg-amber-800 cursor-pointer" onClick={() => setSelectedQuestion(question)}>
+                  <div
+                    className={`w-[150px] h-[90px] border-2 rounded-sm grid place-items-center bg-sky-600 cursor-pointer ${selectedQuestion.id === question.id ? "border-black" : ""}`}
+                    onClick={() => setSelectedQuestion(question)}>
                     {question.type}
                     {question.id}
                   </div>
@@ -82,9 +96,7 @@ export default function CreatePage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {selectedQuestion.options.map((option, index) => (
-                <button key={index} className="bg-green-300 rounded-2xl p-4 cursor-pointer">
-                  {option.text}
-                </button>
+                <input key={index} className="bg-green-300 rounded-2xl p-4 text-center" value={option.text} onChange={(e) => changeOption(option.id, e.target.value)} />
               ))}
             </div>
           </div>
